@@ -58,3 +58,9 @@ EYE_AR_CONSEC_FRAMES = 48 # 사용자가 임계값보다 작은 수치로 있는
 # 알람이 울리고 있는지, 얼마나 울렸는지 판별하는 변수
 COUNTER = 0
 ALARM_ON = False 
+
+# dlib의 face detector, facial landmark predictor 인스턴스 생성
+print("[INFO] loading facial landmark predictor...")
+detector = dlib.get_frontal_face_detector() 
+# 여기서 처음에 argparse로 받은 학습된 dat 파일이 들어간다
+predictor = dlib.shape_predictor(args["shape_predictor"])
