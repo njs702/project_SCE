@@ -106,3 +106,13 @@ while True:
 
         # 양쪽 눈의 EAR 값의 평균값을 구한다
         ear = (leftEAR + rightEAR) / 2.0
+
+        # cv2.drawContours : 윤곽선을 그리는 opencv 함수
+        # compute the convex hull for the left and right eye, then
+		# visualize each of the eyes
+        # cv2.convexHull : 윤곽선의 경계면을 둘러싸는 다각형을 구하는 알고리즘
+        leftEyeHull = cv2.convexHull(leftEye)
+        rightEyeHull = cv2.convexHull(rightEye)
+        cv2.drawContours(frame,[leftEyeHull],-1,(0,255,0),1)
+        cv2.drawContours(frame,[rightEyeHull],-1,(0,255,0),1)
+
