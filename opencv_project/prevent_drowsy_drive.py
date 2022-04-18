@@ -37,3 +37,17 @@ def eye_aspect_ratio(eye):
 
     return ear
 
+# construct the argument parse and parse the arguments
+# 파이썬 호출 당시 인자값을 줘서 동작을 다르게 하고 싶을 떄 사용 - argparse
+
+# 인자값 받을 수 있는 인스턴스 생성
+ap = argparse.ArgumentParser()
+
+# add_argument : 입력받을 인자값을 등록하는 함수
+ap.add_argument("-p", "--shape-predictor", required=True,help="path to facial landmark predictor")
+ap.add_argument("-a", "--alarm",type=str,default="",help="path alarm .WAV file")
+ap.add_argument("-w", "--webcam",type=int,default=0,help="index of webcam on system")
+
+# 입력받은 인자값을 args에 저장
+# vars : 인스턴스의 속성을 dictionary 형태로 보여준다
+args = vars(ap.parse_args())
