@@ -51,3 +51,10 @@ ap.add_argument("-w", "--webcam",type=int,default=0,help="index of webcam on sys
 # 입력받은 인자값을 args에 저장
 # vars : 인스턴스의 속성을 dictionary 형태로 보여준다
 args = vars(ap.parse_args())
+
+EYE_AR_THRESH = 0.3 # 사용자의 눈 측정 임계값, 이보다 작으면 졸린 것으로 판단
+EYE_AR_CONSEC_FRAMES = 48 # 사용자가 임계값보다 작은 수치로 있는 프레임 수
+
+# 알람이 울리고 있는지, 얼마나 울렸는지 판별하는 변수
+COUNTER = 0
+ALARM_ON = False 
