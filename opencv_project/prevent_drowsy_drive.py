@@ -142,3 +142,17 @@ while True:
         else:
             COUNTER = 0
             ALARM_ON = False
+        
+        # 실시간 EAR 값을 frame에 text로 출력해 주는 부분
+        cv2.putText(frame, "EAR: {:.2f}".format(ear),(300,30),
+            cv2.FONT_HERSHEY_SIMPLEX,0.7,(0,0,255),2)
+        
+    # show the frame
+    cv2.imshow("Frame",frame)
+    key = cv2.waitKey(1) & 0xFF
+    if key == ord('q'):
+        break
+
+# cleanup
+cv2.destroyAllWindows()
+vs.stop()
