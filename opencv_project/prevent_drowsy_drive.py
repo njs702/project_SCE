@@ -53,7 +53,7 @@ ap.add_argument("-w", "--webcam",type=int,default=0,help="index of webcam on sys
 args = vars(ap.parse_args())
 
 EYE_AR_THRESH = 0.3 # 사용자의 눈 측정 임계값, 이보다 작으면 졸린 것으로 판단
-EYE_AR_CONSEC_FRAMES = 48 # 사용자가 임계값보다 작은 수치로 있는 프레임 수
+EYE_AR_CONSEC_FRAMES = 40 # 사용자가 임계값보다 작은 수치로 있는 프레임 수
 
 # 알람이 울리고 있는지, 얼마나 울렸는지 판별하는 변수
 COUNTER = 0
@@ -83,7 +83,7 @@ while True:
     # convert it to grayscale
     # grayscale로 바꾸는 이유 - 노이즈 제거 및 연산 속도 증가, 정확도 향상
     frame = vs.read()
-    frame = imutils.resize(frame,width = 400)
+    frame = imutils.resize(frame,width = 450)
     gray = cv2.cvtColor(frame, cv2.COLOR_BGR2GRAY)
 
     # detect faces in the grayscale frame
@@ -102,7 +102,7 @@ while True:
         leftEye = shape[lStart:lEnd]
         rightEye = shape[rStart:rEnd]
         leftEAR = eye_aspect_ratio(leftEye)
-        rightEAR = eye_aspect_ratio(rigthEye)
+        rightEAR = eye_aspect_ratio(rightEye)
 
         # 양쪽 눈의 EAR 값의 평균값을 구한다
         ear = (leftEAR + rightEAR) / 2.0
