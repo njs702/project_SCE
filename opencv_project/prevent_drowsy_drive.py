@@ -74,3 +74,17 @@ predictor = dlib.shape_predictor(args["shape_predictor"])
 print("[INFO] starting video stream thread...")
 # Pi camera 사용하려면 webcam arg에 0보다 큰 정수 입력
 vs = VideoStream(src=args["webcam"]).start()
+time.sleep(2.0)
+
+# loop 함수 내에서 video streaming 관련 처리
+while True:
+    # grab the frame from the threaded video stream
+    # resize - max : 400 pixel
+    # convert it to grayscale
+    # grayscale로 바꾸는 이유 - 노이즈 제거 및 연산 속도 증가, 정확도 향상
+    frame = vs.read()
+    frame = imutils.resize(frame,width = 400)
+    gray = cv2.cvtColor(frame, cv2.COLOR_BGR2GRAY)
+
+    # detect faces in the grayscale frame
+    rects = detector(gray, 0)
