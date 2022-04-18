@@ -64,3 +64,13 @@ print("[INFO] loading facial landmark predictor...")
 detector = dlib.get_frontal_face_detector() 
 # 여기서 처음에 argparse로 받은 학습된 dat 파일이 들어간다
 predictor = dlib.shape_predictor(args["shape_predictor"])
+
+# grab the indexes of the facial landmarks for the left and
+# right eye, respectively
+(lStart, lEnd) = face_utils.FACIAL_LANDMARKS_IDXS["left_eye"]
+(rStart, rEnd) = face_utils.FACIAL_LANDMARKS_IDXS["right_eye"]
+
+# Video stream thread 시작
+print("[INFO] starting video stream thread...")
+# Pi camera 사용하려면 webcam arg에 0보다 큰 정수 입력
+vs = VideoStream(src=args["webcam"]).start()
