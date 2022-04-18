@@ -88,3 +88,21 @@ while True:
 
     # detect faces in the grayscale frame
     rects = detector(gray, 0)
+
+    # face detection 후 해당 face에 대한 처리
+    for rect in rects:
+        # determine the facial landmarks for the face region, then
+		# convert the facial landmark (x, y)-coordinates to a NumPy
+		# array
+        shape = predictor(gray, rect)
+        shape = face_utils.shape_to_np(shape)
+
+        # 왼쪽 눈과 오른쪽 눈의 좌표계를 추출해 낸다
+        # EAR 알고리즘에 적용시킨다
+        leftEye = shape[lStart:lEnd]
+        rightEye = shape[rStart:rEnd]
+        leftEAR = eye_aspect_ratio(leftEye)
+        rightEAR = eye_aspect_ratio(rigthEye)
+
+        # 양쪽 눈의 EAR 값의 평균값을 구한다
+        ear = (leftEAR + rightEAR) / 2.0
