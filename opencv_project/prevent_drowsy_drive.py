@@ -115,4 +115,30 @@ while True:
         rightEyeHull = cv2.convexHull(rightEye)
         cv2.drawContours(frame,[leftEyeHull],-1,(0,255,0),1)
         cv2.drawContours(frame,[rightEyeHull],-1,(0,255,0),1)
+        
+        # EAR 결과값이 threshold(0.3) 보다 작은 지 체크한다
+        # 만약 그렇다면, 졸고 있다는 것 -> COUNTER 증가
+        if ear < EYE_AR_THRESH:
+            COUNTER += 1
+            
+            # COUNTER 변수를 통해 frame 개수 측정
+            # 초기 설정 값인 48보다 크다면 알람 발생하도록 구현
+            if COUNTER >= EYE_AR_CONSEC_FRAMES:
+                if not ALARM_ON:
+                    ALARM_ON = True
 
+                    # 알람 파일 arg가 제공되었는지 체크
+                    # 만약 있다면, thread 생성 후 백그라운드 실행
+                    if args["alarm"] != "":
+                        t = Thread(target=sound_alarm,
+                            args=(args["alarm"],))
+                        t.daemon = True
+                        t.start()
+                
+                # draw an alarm on the frame
+                cv2.putText(frame, "DROWSINESS ALERT!", (10,30),
+                    cv2.FONT_HERSHEY_SIMPLEX,0.7,(0,0,255),2)
+        # 졸음운전이 아닌 경우
+        else:
+            COUNTER = 0
+            ALARM_ON = False
