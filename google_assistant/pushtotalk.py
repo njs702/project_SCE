@@ -158,7 +158,21 @@ class SampleAssistant(object):
                     return continue_conversation
                 # 1. --- simple led control by junseok --- #
 
-                
+                # 2. --- simple hardware control using nodeMCU & WIFI communication --- #
+                if resp.result.spoken_request_text == "백라이트 켜":
+                    os.system("gtts-cli \"백라이트를 켤게요\" --lang ko | mpg123 -")
+                    start_python = "python ~/webapps/led_mqtt/led_on_mqtt.py"
+                    os.system(start_python)
+                    self.conversation_stream.stop_playback()
+                    return continue_conversation
+
+                elif resp.result.spoken_request_text == "백라이트 꺼":
+                    os.system("gtts-cli \"백라이트를 끌게요\" --lang ko | mpg123 -")
+                    start_python = "python ~/webapps/led_mqtt/led_off_mqtt.py"
+                    os.system(start_python)
+                    self.conversation_stream.stop_playback()
+                    return continue_conversation
+                # 2. --- simple hardware control using nodeMCU & WIFI communication --- #
 
             if len(resp.audio_out.audio_data) > 0:
                 self.conversation_stream.write(resp.audio_out.audio_data)
