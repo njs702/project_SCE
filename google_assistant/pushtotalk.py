@@ -174,6 +174,48 @@ class SampleAssistant(object):
                     return continue_conversation
                 # 2. --- simple hardware control using nodeMCU & WIFI communication --- #
 
+                # 3. --- simple traffic info query by junseok --- #
+                
+                my_query_string_list = resp.result.spoken_request_text.split(" ")
+
+                # print(my_query_string_list)
+                if len(my_query_string_list) >= 4:
+                    my_query_routeName = my_query_string_list[0]
+                    my_query_cozoneName = my_query_string_list[1]
+                    if my_query_string_list[-4] == "교통" and my_query_string_list[-3] == "상황" and my_query_string_list[-2] == "알려" and my_query_string_list[-1] == "줘": 
+                        os.system("gtts-cli \"잠시만 기다려 주세요\" --lang ko | mpg123 -")
+
+                        # --- request url provided by Korea Expressway Corporation --- #
+                        url = "http://data.ex.co.kr/openapi/odtraffic/trafficAmountByRealtime"
+
+                        # --- request variable --- #
+                        queryString = "?" + urlencode(
+                            {
+                                "key" : "2412828365",
+                                "type" : "json"
+                            }
+                        )
+                        
+                        # --- response : format json --- #
+                        response = requests.get(url + queryString)
+                        r_dict = json.loads(response.text)
+                        r_item = r_dict.get("list")
+
+                        # --- variable to control json data in this python code : format dict --- #
+                        result = {}
+
+                        for item in r_item:
+                            if item.get("routeName") == my_query_routeName and my_query_cozoneName in item.get("conzoneName"):
+                                result = item
+                                break
+                        # --- Answer the response of my request using google TTS library --- #
+                        my_response_string = "현재 " + my_query_routeName + " " + my_query_cozoneName + " 지역의 속도는 " + result['speed'] + " 이고, 차량 트래픽은 " + result['trafficAmout'] + " 입니다." 
+                        os_system_string_result = "gtts-cli \""+ my_response_string+"\" --lang ko | mpg123 -"
+                        os.system(os_system_string_result)
+                        self.conversation_stream.stop_playback()
+                        return continue_conversation
+                # 3. --- simple traffic info query by junseok --- #
+
             if len(resp.audio_out.audio_data) > 0:
                 self.conversation_stream.write(resp.audio_out.audio_data)
             if resp.result.spoken_response_text:
