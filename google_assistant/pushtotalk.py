@@ -216,6 +216,31 @@ class SampleAssistant(object):
                         return continue_conversation
                 # 3. --- simple traffic info query by junseok --- #
 
+                # 4. --- simple music player using pygame.mixer --- #
+                if resp.result.spoken_request_text == "노래 틀어 줘":
+                    # play background
+                    start_music_python = "python ~/webapps/music_play/music_play.py &"
+                    os.system(start_music_python)
+                    os.system("googlesamples-assistant-pushtotalk")
+                    self.conversation_stream.stop_playback()
+                    return continue_conversation
+                
+                if resp.result.spoken_request_text == "랜덤 노래 틀어 줘":
+                    # play random music background
+                    start_music_python = "python ~/webapps/music_play/random_music_play.py &"
+                    os.system(start_music_python)
+                    os.system("googlesamples-assistant-pushtotalk")
+                    self.conversation_stream.stop_playback()
+                    return continue_conversation
+
+                if resp.result.spoken_request_text == "노래 꺼 줘":
+                    # stop background music
+                    start_music_python = "python ~/webapps/music_play/stop_music.py"
+                    os.system(start_music_python)
+                    self.conversation_stream.stop_playback()
+                    return continue_conversation
+                # 4. --- simple music player using pygame.mixer --- #
+
             if len(resp.audio_out.audio_data) > 0:
                 self.conversation_stream.write(resp.audio_out.audio_data)
             if resp.result.spoken_response_text:
