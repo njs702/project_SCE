@@ -11,12 +11,18 @@ import imutils
 import time
 import dlib
 import cv2
+import pygame
 
+pygame.mixer.init()
+pygame.mixer.music.set_volume(1.0)
 # make alarm to wake the driver
 def sound_alarm(path):
     # play an alarm sound
-    # maybe we can use pygame.
-    pass
+	# playsound.playsound(path)
+    pygame.mixer.music.load("./alarm.wav")
+    pygame.mixer.music.play()
+    while pygame.mixer.music.get_busy() == True:
+        continue
 
 def eye_aspect_ratio(eye):
 	# compute the euclidean distances between the two sets of
