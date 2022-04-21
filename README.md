@@ -55,5 +55,36 @@ Raspberry pi4 + Arduino uno & nodeMCU를 활용해 사용자가 차량을 운용
 
 <p align ="center"><img src="./img/rpi_control.PNG"></p>
 
-<p align ="center"><그림 3 - Open API를 활용한 정보 제공 시스템></p>
+<p align ="center"><그림 4 - RPi 제어 시스템></p>
 
+## 3.2 Real-time Service Delivery System
+### 3.2.1 실시간 원격 단말 통신 시스템
+> 단말에서 들어오는 실시간 데이터를 활용해 제어할 수 있다.
+
+원격 단말 ESP8266에서 들어오는 실시간 초음파 센서 값 데이터를 활용해 간단한 안전 장치 시스템을 만들었다. 실시간으로 들어오는 값이 비약적으로 증가하는 순간을 포착해, 추락 위험이 있음을 감지하고 적절한 제어 명령을 전달한다.
+
+<p align ="center"><img src="./img/remote_node_real_time.PNG"></p>
+<p align ="center"><그림 5 - 초음파 센서를 활용한 안전 시스템></p>
+
+### 3.2.2 실시간 졸음 운전 방지 시스템
+> 실시간으로 사용자의 얼굴을 스트리밍하며 졸음 운전을 포착한다.
+
+라즈베리 파이 카메라 v2를 활용해 사용자의 얼굴을 실시간으로 감시한다. 만약 사용자가 눈을 일정 프레임 이상 동안 감는다면, 경보음을 발생시켜 사용자가 자각할 수 있게 설계했다.
+
+<p align ="center"><img src="./img/prevent_drowsy.PNG"></p>
+<p align ="center"><그림 6 - 카메라를 활용한 졸음운전 방지 시스템></p>
+
+#### 3.2.2.1 shape_predictor_68_face_landmarks.dat
+얼굴의 특징점을 68개로 구분해 놓았고, 해당 특징점을 잡아내는 알고리즘은 미리 학습되어 있는 라이브러리를 활용했다. 그 중에서도, 졸음운전을 판별하기 위해 왼쪽 눈과 오른쪽 눈의 12개 특징점을 사용했다.
+
+<p align ="center"><img src="./img/shape_68.png" width="400" height="400"></p>
+<p align ="center"><그림 7 - shape_predictor_68_face_landmarks></p>
+
+#### 3.2.2.2 EAR (Eye Aspect Ratio) Algorithm
+눈의 비율을 이용해 눈을 감고 있는지, 뜨고 있는지를 판별한다. 적절한 임계값과 적절한 프레임 수를 설정해서 졸음 운전을 하는 것인지 판별하도록 설계했다.
+
+<p align ="center"><img src="./img/ear_priciple.webp"></p>
+<p align ="center"><그림 8 - 졸음 판별 원리></p>
+
+<p align ="center"><img src="./img/ear_algorithm.webp"></p>
+<p align ="center"><그림 9 - EAR Algorithm 공식></p>
