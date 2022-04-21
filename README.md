@@ -28,7 +28,7 @@ Raspberry pi4 + Arduino uno & nodeMCU를 활용해 사용자가 차량을 운용
 
 <p align ="center"><img src="./img/rpi_gs.PNG"></p>
 
-#### <center><그림 1 - RPi + Google Assistant></center>
+<center><그림 1 - RPi + Google Assistant></center>
 
 ### 3.1.1 원격 단말 기기 제어 시스템
 > 간단한 음성 명령으로 원거리의 단말을 제어할 수 있다. *ex) 백라이트 켜 줘*
@@ -37,7 +37,7 @@ Raspberry pi4 + Arduino uno & nodeMCU를 활용해 사용자가 차량을 운용
 
 <p align ="center"><img src="./img/remote_node_control.PNG"></p>
 
-#### <center><그림 2 - 원격 Wifi 통신 사용 단말 제어></center>
+<center><그림 2 - 원격 Wifi 통신 사용 단말 제어></center>
 
 ### 3.1.2 Open API를 활용한 정보 제공 시스템
 > *"영동선 속사 IC 교통상황 알려줘"*
@@ -46,7 +46,7 @@ Raspberry pi4 + Arduino uno & nodeMCU를 활용해 사용자가 차량을 운용
 
 <p align ="center"><img src="./img/request_openapi_response.PNG"></p>
 
-#### <center><그림 3 - Open API를 활용한 정보 제공 시스템></center>
+<center><그림 3 - Open API를 활용한 정보 제공 시스템></center>
 
 ### 3.1.3
 
