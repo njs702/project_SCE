@@ -88,3 +88,31 @@ Raspberry pi4 + Arduino uno & nodeMCU를 활용해 사용자가 차량을 운용
 
 <p align ="center"><img src="./img/ear_algorithm.webp"></p>
 <p align ="center"><그림 9 - EAR Algorithm 공식></p>
+
+## 3.3 Raspbeery pi4 + Temperature and Humidity Sensor
+> 수면을 위한 최적의 온도 (16 -18℃)와 습도(40 - 60%)를 기준으로 온습도 센서를 활용하여 졸음이 오는 환경을 인식한다. 이후, 센서에서 측정된 값을 시리얼통신을 통해 라즈베리파이로 보낸다. 그 후, 음성 알림과 동시에 LED 등이 켜지며 졸음운전을 방지할 수 있다. 
+### 3.3.1 Temperature and Humidity Sensor 
+> Sensor module
+습도,온도 센서와 1k resistor가 달려있는 모듈로, data를 2초 마다 한번씩 받을 수 있다. 
+<p align ="center"><img src="./img/sensorDHT1.PNG"></p>
+<p align ="center"><그림 10 - DHT11></p>
+
+### 3.3.2 실시간 졸음 운전 방지 온습도 알림 시스템
+수면을 위한 최적의 온도가 되면 LED1(빨강)을 ON한 후, 연결된 스피커를 통해 "일어나세요" 라는 음성이 출력된다.(1번) 또한 졸음 운전의 최적의 온도와 근접하면 LED2(노랑) 점등과 음성 "잠시 창문을 열고 환시키는건 어떨까요?", 그 이하는 LED3(초록)을 점등과 "안전운전하세요"라고 출력된다. 
+<p align ="center"><img src="./img/circuitjk.PNG"></p>
+<p align ="center"><그림 11 - DHT11></p>
+
+### 3.3.3 음성출력 라이브러리
+> 아두이노에서 보낸 신호를 특정 값으로 받아 특정온도에 해당하는 정보를 받아 올 수 있다. 이 값을 기준으로 gtts를 활용하여 원하는 문장을 스피커로 출력한다. 
+
+            LED1 [ 온도 (16 -18℃)와 습도(40 - 60%) ]-> " 일어나세요 "
+
+            LED2 [ 온도 (14 -15℃)와 습도(35 - 40%) ]-> " 잠시 창문을 열고 환기시키는건 어떨까요? "
+  
+            LED3 [ 온도 (10 -13℃)와 습도(30 - 34%) ]-> " 안전운전하세요^^ "
+> *gttts [ goole text to speech]
+  : 원하는 text를 음성 변환하여 음성으로 출력하거나 저장할 수 있는 기능
+
+### 3.3.4 bool함수 활용
+> 논리 자료형이라고 하는 이 타입은 참(True) 혹은 거짓(False)을 나타내는 자료형
+> stdbool.h 추가 후 bool, true, false를 사용
