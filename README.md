@@ -48,5 +48,12 @@ Raspberry pi4 + Arduino uno & nodeMCU를 활용해 사용자가 차량을 운용
 
 <p align ="center"><그림 3 - Open API를 활용한 정보 제공 시스템></p>
 
-### 3.1.3
+### 3.1.3 RPi 내장 하드웨어 제어하기 with GPIO & pygame
+> *"노래 틀어 줘"*, *"불 켜"*
+
+원격 단말 노드를 제어하는 것이 아닌, RPi 자체를 제어할 수 있다. 이번 프로젝트에서는 RPi에 내장된 하드웨어 제어 기능을 추가했다. GPIO 핀을 활용해 간단한 LED를 제어하고, pygame 라이브러리를 활용해 내장되어있는 음악을 틀을 수 있게 설계했다.
+
+<p align ="center"><img src="./img/rpi_control.PNG"></p>
+
+<p align ="center"><그림 3 - Open API를 활용한 정보 제공 시스템></p>
 
