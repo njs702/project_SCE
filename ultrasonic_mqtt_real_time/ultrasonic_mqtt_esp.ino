@@ -16,3 +16,15 @@ int value = 0;
 
 int trig = D1;
 int echo = D0;
+
+void setup() {
+  pinMode(BUILTIN_LED, OUTPUT);// Initialize the BUILTIN_LED pin as an output
+  Serial.begin(115200);
+  pinMode(echo,INPUT);
+  pinMode(trig,OUTPUT);
+  setup_wifi();
+  client.setServer(mqtt_server, 1883);
+  client.setCallback(callback);
+
+  // digitalWrite(BUILTIN_LED,LOW);
+}
