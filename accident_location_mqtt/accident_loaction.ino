@@ -191,3 +191,17 @@ void I2C_Write(uint8_t deviceAddress, uint8_t regAddress, uint8_t data){
   Wire.write(data);
   Wire.endTransmission();
 }
+
+void Read_RawValue(uint8_t deviceAddress, uint8_t regAddress){
+  Wire.beginTransmission(deviceAddress);
+  Wire.write(regAddress);
+  Wire.endTransmission();
+  Wire.requestFrom(deviceAddress, (uint8_t)14);
+  AccelX = (((int16_t)Wire.read()<<8) | Wire.read());
+  AccelY = (((int16_t)Wire.read()<<8) | Wire.read());
+  AccelZ = (((int16_t)Wire.read()<<8) | Wire.read());
+  Temperature = (((int16_t)Wire.read()<<8) | Wire.read());
+  GyroX = (((int16_t)Wire.read()<<8) | Wire.read());
+  GyroY = (((int16_t)Wire.read()<<8) | Wire.read());
+  GyroZ = (((int16_t)Wire.read()<<8) | Wire.read());
+}
