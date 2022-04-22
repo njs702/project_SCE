@@ -112,4 +112,38 @@ Raspberry pi4 + Arduino uno & nodeMCU를 활용해 사용자가 차량을 운용
             LED3 [ 온도 (10 -13℃)와 습도(30 - 34%) ]-> " 안전운전하세요^^ "
 > *gttts [ goole text to speech]
   : 원하는 text를 음성 변환하여 음성으로 출력하거나 저장할 수 있는 기능
+### 3.3.4 bool함수 
 
+
+### 3.3.5 구성 회로
+<p align ="center"><img src="./img/joo.PNG"></p>
+<p align ="center"><그림 12 - schematict></p>
+
+## 3.4 Real-time Accident Location Identification System
+### 3.4.1 실시간 사고위치파악 시스템
+>자이로센서(충격감지), 불꽃감지센서(화재감지), GPS센서(사고위치파악)를 이용하여 실시간 사고위치파악 센서를 만들고 시스템을 구현함
+
+실시간 사고위치파악 시스템은 불꽃감지 or 충겸감지가 인식되면 위치 값을 전달 받고 있던 GPS센서가 Mosquitto를 통하여 라즈베리파이 서버에 사고 위치값을 통신합니다. 
+<p align ="center"><img src="./img/flow.PNG"></p>
+<p align ="center"><그림 13 - 동작흐름도></p>
+<p align ="center"><img src="./img/accident_location_bb.PNG"></p>
+<p align ="center"><그림 14 - 실시간 사고위치파악센서 회로도></p>
+
+>참고영상
+<p align ="center"><img src="./img/movie.gif"></p>
+
+#### 3.4.1.1 NEO-6M GPS 모듈
+>GPS는 GlobalPostioning System의 약어로 지구 궤도를 돌고 있는 위성으로부터 나온 데이터의 분석을 통해 현재 위치의 위도와 경도, 시간, 속도 등을 알 수 있다.
+<p align ="center"><img src="./img/neo-6m.PNG"></p>
+<p align ="center"><그림 15 - NEO-6M GPS 모듈></p>
+
+#### 3.4.1.2 MPU-6050 6축 자이로 가속도 센서 모듈
+>자이로 센서의 원리는 자이로스코프가 내장된 물체가 회전 운동을 하면 생기는 회전 반발력을 측정하여 전기신호로 바꾸어 출력하고 이를 수치화하여 활용한다. 실시간 사고 위치 파악센서에서는 충격감지센서로 사용하였다.
+<p align ="center"><img src="./img/MPU-6050.PNG"></p>
+<p align ="center"><그림 16 - MPU-6050 6축 자이로 가속도 센서 모듈></p>
+
+#### 3.4.1.3 KY-026 불꽃 센서 모듈
+>불꽃 감지 모듈은 불꽃에서 파생되는 열 복사인 적외선 파장(760nm~110nm)을 감지하는 원리입니다.
+>근접한 거리의 불꽃만 감지되며, 최대 감지거리는 약17cm~18cm입니다.
+<p align ="center"><img src="./img/KY-026.PNG"></p>
+<p align ="center"><그림 17 - 불꽃 센서 모듈></p>
