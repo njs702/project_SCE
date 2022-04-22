@@ -102,3 +102,85 @@ void reconnect() {
     }
   }
 }
+
+void setup() {
+  Serial.begin(115200);
+  gpsSerial.begin(GPSBAUD);
+
+  setup_wifi();
+  client.setServer(mqtt_server, 1883);
+  client.setCallback(callback);
+
+  Wire.begin(sda, scl);
+  MPU6050_Init();
+  pinMode(flame_sensor, INPUT); // declaring sensor pin as input pin for Arduino
+}
+
+void loop() {
+  if (!client.connected()) {
+    reconnect();
+  }
+  client.loop();
+
+  double Ax, Ay, Az, T, Gx, Gy, Gz;
+
+  flame_detected = digitalRead(flame_sensor); // reading from the sensor
+  
+  Read_RawValue(MPU6050SlaveAddress, MPU6050_REGISTER_ACCEL_XOUT_H);
+  
+  //divide each with their sensitivity scale factor
+  Ax = (double)AccelX/AccelScaleFactor;
+  Ay = (double)AccelY/AccelScaleFactor;
+  Az = (double)AccelZ/AccelScaleFactor;
+  T = (double)Temperature/340+36.53; //temperature formula
+  Gx = (double)GyroX/GyroScaleFactor;
+  Gy = (double)GyroY/GyroScaleFactor;
+  Gz = (double)GyroZ/GyroScaleFactor;
+
+  if (Ax >= num || Ax <= -num ){
+    Serial.println("shock!!");
+    gyro_check++;
+  }
+  if (Ay >= num || Ay <= -num ){
+    Serial.println("shock!!");
+    gyro_check++;
+  }
+  
+  if (flame_detected == 1){
+    Serial.println("fire!!");
+    fire_check++;
+  }
+
+  while (gpsSerial.available() > 0) {
+        if (gps.encode(gpsSerial.read())) {
+            if (gps.location.isUpdated()) {
+                double lat = gps.location.lat();
+                double lng = gps.location.lng();
+        
+                snprintf(buffer, sizeof(buffer),
+                         "Latitude: %.8f, Longitude: %.8f",
+                         lat, lng);
+                long now = millis();
+                if (now - lastMsg > 2000) {
+                  lastMsg = now;
+                  ++value;
+                  Serial.print("Publish message: ");
+                  if(gyro_check>0||fire_check>0){
+                    Serial.println(buffer);
+                    client.publish("ESP8266/GPS", buffer);
+                    gyro_check=0;
+                    fire_check=0;
+                  }
+                  sprintf(buffer, "%.8f", 000.00000000);
+                  Serial.println(buffer);
+                  client.publish("ESP8266/GPS", buffer);
+                }
+            }
+            else{
+              sprintf(buffer, "%.8f", 123.45678); 
+            }
+        }
+        
+  }
+  delay(100);
+}
