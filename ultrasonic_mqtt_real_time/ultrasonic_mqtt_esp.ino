@@ -102,3 +102,22 @@ void reconnect() {
     }
   }
 }
+
+void loop() {
+
+  if (!client.connected()) {
+    reconnect();
+  }
+  client.loop();
+
+  long now = millis();
+  if (now - lastMsg > 500) {
+    lastMsg = now;
+    ++value;
+    // snprintf (msg, 75, "hello world #%ld", value);
+    snprintf (msg, 75, "%lf", readUltraSonic());
+    /* Serial.print("Publish message: ");
+    Serial.println(msg); */
+    client.publish("outTopic", msg);
+  }
+}
