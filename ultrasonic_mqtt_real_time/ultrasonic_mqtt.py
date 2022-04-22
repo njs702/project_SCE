@@ -19,6 +19,11 @@ def on_publish(client, userdata, mid):
 # subscribe from nodeMCU - info = real_time_distance(from HC-SR04)
 def on_subscribe(client, userdata, mid, granted_qos):
     print("subscribed: " + str(mid) + " " + str(granted_qos))
+    dist = float(str(msg.payload.decode("utf-8")))
+    if 40 <= dist and dist <= 110:
+        client.publish('inTopic','1',1)
+        client.loop_stop()
+        client.disconnect()
 
 # create new client
 client = mqtt.Client()
