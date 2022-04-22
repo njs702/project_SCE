@@ -115,6 +115,7 @@ Raspberry pi4 + Arduino uno & nodeMCU를 활용해 사용자가 차량을 운용
 ### 3.3.4 bool함수 
 
 
+
 ### 3.3.5 구성 회로
 <p align ="center"><img src="./img/joo.PNG"></p>
 <p align ="center"><그림 12 - schematict></p>
@@ -144,6 +145,7 @@ Raspberry pi4 + Arduino uno & nodeMCU를 활용해 사용자가 차량을 운용
 
 #### 3.4.1.3 KY-026 불꽃 센서 모듈
 >불꽃 감지 모듈은 불꽃에서 파생되는 열 복사인 적외선 파장(760nm~110nm)을 감지하는 원리입니다.
+
 >근접한 거리의 불꽃만 감지되며, 최대 감지거리는 약17cm~18cm입니다.
 <p align ="center"><img src="./img/KY-026.PNG"></p>
 <p align ="center"><그림 17 - 불꽃 센서 모듈></p>
