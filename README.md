@@ -117,7 +117,7 @@ Raspberry pi4 + Arduino uno & nodeMCU를 활용해 사용자가 차량을 운용
 
 
 ### 3.3.5 구성 회로
-<p align ="center"><img src="./img/joo.PNG"></p>
+<p align ="center"><img src="./img/joo.png"></p>
 <p align ="center"><그림 12 - schematict></p>
 
 ## 3.4 Real-time Accident Location Identification System
@@ -127,7 +127,7 @@ Raspberry pi4 + Arduino uno & nodeMCU를 활용해 사용자가 차량을 운용
 실시간 사고위치파악 시스템은 불꽃감지 or 충겸감지가 인식되면 위치 값을 전달 받고 있던 GPS센서가 Mosquitto를 통하여 라즈베리파이 서버에 사고 위치값을 통신합니다. 
 <p align ="center"><img src="./img/flow.PNG"></p>
 <p align ="center"><그림 13 - 동작흐름도></p>
-<p align ="center"><img src="./img/accident_location_bb.PNG"></p>
+<p align ="center"><img src="./img/accident_location_bb.png"></p>
 <p align ="center"><그림 14 - 실시간 사고위치파악센서 회로도></p>
 
 >참고영상
