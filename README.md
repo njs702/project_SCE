@@ -113,6 +113,3 @@ Raspberry pi4 + Arduino uno & nodeMCU를 활용해 사용자가 차량을 운용
 > *gttts [ goole text to speech]
   : 원하는 text를 음성 변환하여 음성으로 출력하거나 저장할 수 있는 기능
 
-### 3.3.4 bool함수 활용
-> 논리 자료형이라고 하는 이 타입은 참(True) 혹은 거짓(False)을 나타내는 자료형
-> stdbool.h 추가 후 bool, true, false를 사용
